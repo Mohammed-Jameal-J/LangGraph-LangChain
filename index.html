@@ -257,7 +257,7 @@
       <h1>LangGraph &amp; LangChain, oru <em>graph</em> maadhiri kathukalam.</h1>
       <p class="lead">State, Nodes, Edges-la irundhu, Chunking, RAG pipeline varaikum — ella concept-um real-world diagram-oda, code-oda explain pannirukom.</p>
       <div class="hero-stats">
-        <div><div class="stat-num">12</div><div class="stat-label">Core Sections</div></div>
+        <div><div class="stat-num">13</div><div class="stat-label">Core Sections</div></div>
         <div><div class="stat-num">06</div><div class="stat-label">Hand-built Diagrams</div></div>
         <div><div class="stat-num">01</div><div class="stat-label">Full RAG Build</div></div>
       </div>
@@ -940,6 +940,68 @@ openai_client = OpenAI(api_key=os.environ[<span class="str">"OPENAI_API_KEY"</sp
       <div class="quiz-score" id="quizScore"></div>
     </section>
 
+    <section class="block" id="s13">
+      <div class="block-eyebrow">Part 13</div>
+      <h2>Career Path — Enna Role, Adhu Ku Apparam Enna</h2>
+      <p>Idhu vare padichadhu vachi neenga eppadi apply pannalam, next level ku enna padikanum, enna project build pannalam, adhula security enga vera — ellathayum deep-a paakalam.</p>
+
+      <h3>13.1 Ippo Apply Pannalaam Enda Roles</h3>
+      <p>Idhu vare cover pannina State/Nodes/Edges, chunking, RAG, multi-agent basics, API key handling — idhu keela irukura <b>entry/junior level</b> roles-ku already podhum:</p>
+      <div class="pillgrid">
+        <span class="pill">Junior AI / GenAI Engineer</span>
+        <span class="pill">LLM Application Developer</span>
+        <span class="pill">RAG Engineer (Associate)</span>
+        <span class="pill">AI Chatbot / Automation Developer</span>
+        <span class="pill">Python Developer — AI/LLM focus</span>
+        <span class="pill">Prompt Engineer (Junior)</span>
+      </div>
+      <div class="callout">Real job postings (2026) la <b>"AI Engineer"</b> than most common title — mostly LangChain/LangGraph + RAG + Python combo than skill stack. Portfolio-la 1-2 solid agentic project irundha, interview screening cross pannuradhu easy aagum.</div>
+
+      <h3>13.2 Level-Up Panna Adhutha Enna Padikanum</h3>
+      <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>Area</th><th>Enna Padikanum</th><th>Yean</th></tr>
+        <tr><td>Vector DBs Deep-dive</td><td>Pinecone, Weaviate, Qdrant, FAISS — indexing, filtering, hybrid search tuning</td><td>ChromaDB basic-a irundha podhaadhu, production scale-ku vera DB venum</td></tr>
+        <tr><td>Advanced RAG</td><td>Re-ranking, query rewriting / HyDE, multi-hop retrieval, RAGAS evaluation</td><td>Basic RAG accuracy limited, real systems-ku idhu ellam venum</td></tr>
+        <tr><td>Multi-Agent Frameworks</td><td>CrewAI, AutoGen, Google ADK — LangGraph-oda compare pannitu paaklam</td><td>Different companies different framework use pannuvanga</td></tr>
+        <tr><td>LLMOps / Evals</td><td>LangSmith tracing, LLM-as-judge, ground-truth datasets, production monitoring</td><td>"AI Evals Engineer" oru fast-growing role, agent reliability ku mandatory</td></tr>
+        <tr><td>Cloud &amp; Deployment</td><td>Docker, Kubernetes, AWS/Azure/GCP, serverless (Lambda), CI/CD</td><td>Local script-a production-ku edukanumna deployment skills mandatory</td></tr>
+        <tr><td>System Design</td><td>Scaling agent systems, caching, async processing, load balancing</td><td>Senior roles-ku system design romba kekuvanga</td></tr>
+        <tr><td>Fine-tuning Basics</td><td>LoRA/QLoRA, when to fine-tune vs prompt-engineer vs RAG</td><td>Specialized domains-ku (legal, medical) fine-tuning venum</td></tr>
+      </table>
+      </div>
+
+      <h3>13.3 Build Panna Vendiya Projects (Portfolio-ku)</h3>
+      <ol>
+        <li><b>Auth-protected RAG Chatbot</b> — Part 9 project-a extend pannitu, login/auth add pannunga, ovvoru user-ku vera document access (multi-tenant RAG).</li>
+        <li><b>Multi-Agent Support System with Audit Logs</b> — Part 2 support-desk project-a extend pannitu, ovvoru agent decision-a audit log-la track pannunga (who did what, when).</li>
+        <li><b>Enterprise Doc Search with Row-Level Access Control</b> — different departments (HR, Finance, Engineering) documents, ovvoru user role base panni mattum andha department docs retrieve aagum maadhiri build pannunga.</li>
+      </ol>
+      <div class="callout">Idhu 3 project-um <b>"security-first"</b> maadhiri design pannirukom — keela irukura Part 13.4 mukkiyama padinga, project build pannumbothu apply pannunga.</div>
+
+      <h3>13.4 Security — Deep Dive (Production-ku Mandatory)</h3>
+      <p>LLM apps la security romba different — traditional web security + AI-specific risks rendum irukum. Idhu keela irukura ovvoru point-um real production system-la miss pannaadha:</p>
+
+      <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>Risk Area</th><th>Enna Pannanum</th></tr>
+        <tr><td><b>Prompt Injection</b></td><td>User input-la irundhu vandhu system prompt-a override panna try pannuvanga ("ignore previous instructions"). LLM Guard pattern use pannunga (Part 4-la paathom) — separate LLM call vachu malicious input detect pannunga, appuram mattum main flow continue pannunga.</td></tr>
+        <tr><td><b>PII Leakage</b></td><td>User message-la irundhu phone/email/card number ellam mask pannunga (redaction node) — LLM-ku andha data pass aagave koodadhu, logs-layum store pannaadhinga.</td></tr>
+        <tr><td><b>API Key Management</b></td><td><code>.env</code> + secrets manager (AWS Secrets Manager / Vault) use pannunga, git-ku commit pannaadhinga, dev/staging/prod-ku separate keys, periodic rotation.</td></tr>
+        <tr><td><b>Rate Limiting / Abuse</b></td><td>Per-user request limits set pannunga — illana oru user script vachi un API budget-a drain pannidalam. Exponential backoff + queue system use pannunga.</td></tr>
+        <tr><td><b>Tool / Agent Sandboxing</b></td><td>Agent-ku code execution illa file access kudukumbothu, <b>least-privilege</b> follow pannunga — production DB delete pannura permission agent-ku venaam, read-only mattum kudunga.</td></tr>
+        <tr><td><b>RAG Permission Leakage</b></td><td>Vector store-la ella document-um kalandhu irundha, User A oda query-ku User B oda confidential doc retrieve aagi answer-la varalam. Retrieval query la <b>always</b> user's access-level filter pannunga (metadata-la role/department vachu).</td></tr>
+        <tr><td><b>Output Validation</b></td><td>LLM output-a direct-a execute/display pannaadhinga — JSON schema validate pannunga, HTML/script injection irukka check pannunga (especially chatbot UI-la render panna povainga).</td></tr>
+        <tr><td><b>Jailbreak / Guardrails</b></td><td>System prompt-a strong-a design pannunga, content moderation layer add pannunga (Anthropic/OpenAI moderation endpoints use pannalam).</td></tr>
+        <tr><td><b>Dependency Security</b></td><td><code>requirements.txt</code> la versions pin pannunga, <code>pip-audit</code> / <code>safety</code> vachi vulnerable packages scan pannunga regularly.</td></tr>
+        <tr><td><b>Data Privacy / Compliance</b></td><td>User data enga store aagudhu, evlo naal retain pannuvom nu clear-a define pannunga. GDPR/data residency requirements irundha, andha region-oda data center use pannunga.</td></tr>
+        <tr><td><b>Audit Logging</b></td><td>Ovvoru agent action-um log pannunga (which node ran, what decision) — ana logs-la raw PII store pannaadhinga, redacted version mattum store pannunga.</td></tr>
+      </table>
+      </div>
+
+      <div class="callout"><b>Rule of thumb:</b> "LLM oru untrusted user"-nu nenachi design pannunga — adhu enna output kudukum nu predict panna mudiyaadhu, adhanala validate pannாma edhuvum trust pannaadhinga. Adhே maadhiri, "user input oru attacker input"-nu nenachi sanitize pannunga.</div>
+    </section>
+
     <footer>
       Built as a learning companion for LangGraph &amp; LangChain in Tanlish. Next: idhே project-a RAG retriever node add pannitu extend pannalam.
     </footer>
@@ -961,6 +1023,7 @@ const sections = [
   {id:'s10', label:'10 · API Keys & Limits'},
   {id:'s11', label:'11 · Practice Projects'},
   {id:'s12', label:'12 · Self-Check Quiz'},
+  {id:'s13', label:'13 · Career & Security'},
 ];
 
 function buildNav(container){

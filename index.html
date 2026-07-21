@@ -258,7 +258,7 @@
       <h1>LangGraph &amp; LangChain, oru <em>graph</em> maadhiri kathukalam.</h1>
       <p class="lead">State, Nodes, Edges-la irundhu, Chunking, RAG pipeline varaikum — ella concept-um real-world diagram-oda, code-oda explain pannirukom.</p>
       <div class="hero-stats">
-        <div><div class="stat-num">14</div><div class="stat-label">Core Sections</div></div>
+        <div><div class="stat-num">15</div><div class="stat-label">Core Sections</div></div>
         <div><div class="stat-num">06</div><div class="stat-label">Hand-built Diagrams</div></div>
         <div><div class="stat-num">01</div><div class="stat-label">Full RAG Build</div></div>
       </div>
@@ -268,9 +268,9 @@
     <section class="block" id="s0">
       <div class="block-eyebrow">Coverage Check</div>
       <h2>Idhu Everything Cover Pannuma?</h2>
-      <p>Ippo site 15 sections (Parts 0–14) — core LangGraph/LangChain concepts mattum illa, hands-on projects, API key setup, career roles, deep security, and oru full Streamlit + OpenAI RAG project varaikum cover pannirudhu. Straight-a sollanum na: <b>practical, job-ready foundation full-a irukku</b>, ana framework-oda ovvoru corner-um illa.</p>
+      <p>Ippo site 16 sections (Parts 0–15) — core LangGraph/LangChain concepts mattum illa, hands-on projects, API key setup, career roles, deep security, Agentic AI deep-dive, and oru full Streamlit + OpenAI RAG project varaikum cover pannirudhu. Straight-a sollanum na: <b>practical, job-ready foundation full-a irukku</b>, ana framework-oda ovvoru corner-um illa.</p>
 
-      <div class="callout"><b>Ippo cover pannirukom:</b> State/Nodes/Edges/Cycles, Checkpointer basics, LangChain vs LangGraph, Chunking strategies, Full RAG (ingestion + retrieval), Support-ticket &amp; multi-agent patterns, 2 hands-on projects, Claude/OpenAI API key setup + spend limits, career roles + study roadmap, deep security (11-point table), 20-question MCQ self-test, and a complete Streamlit + OpenAI RAG project from key to deploy.</div>
+      <div class="callout"><b>Ippo cover pannirukom:</b> State/Nodes/Edges/Cycles, Checkpointer basics, LangChain vs LangGraph, Chunking strategies, Full RAG (ingestion + retrieval), Support-ticket &amp; multi-agent patterns, Agentic AI (ReAct loop, autonomy levels, tool-calling), 2 hands-on projects, Claude/OpenAI API key setup + spend limits, career roles + study roadmap, deep security (11-point table), 20-question MCQ self-test, and a complete Streamlit + OpenAI RAG project from key to deploy.</div>
 
       <div class="coverage-note">
         <b>Innum missing topics (LangGraph):</b>
@@ -283,7 +283,7 @@
         <b style="display:block;margin-top:12px;">Missing topics (LangChain):</b>
         <ul>
           <li>LCEL runnables in depth (RunnableParallel, RunnableBranch)</li>
-          <li>Output parsers, Agents / ReAct pattern</li>
+          <li>Output parsers</li>
           <li>LangSmith tracing &amp; evaluation</li>
           <li>Memory types — buffer, summary, entity</li>
         </ul>
@@ -503,7 +503,6 @@ result = app.invoke({<span class="str">"user_query"</span>: <span class="str">"c
         <span class="pill">Non-Determinism Control</span>
         <span class="pill">Prompt Injection</span>
         <span class="pill">Prompt Versioning</span>
-        <span class="pill">Prompt</span>
         <span class="pill">Cost Calculation</span>
         <span class="pill">PII Redaction</span>
         <span class="pill">Fallback / Retry</span>
@@ -1177,6 +1176,109 @@ query = st.chat_input(<span class="str">"Ask something about the PDF..."</span>)
       </ol>
     </section>
 
+    <section class="block" id="s15">
+      <div class="block-eyebrow">Part 15</div>
+      <h2>Agentic AI — Deep Dive</h2>
+      <p>Idhu vare namma build panna ellame — indirectly <b>Agentic AI</b> than. Ippo idha clear-a, separate concept-a puriyanum.</p>
+
+      <h3>15.1 Agentic AI Enna?</h3>
+      <p><b>Agentic AI</b> = LLM-ku just answer kudukura vela mattum illa, adha vachi <b>plan pannu, tools use pannu, result paathu next step decide pannu, goal mudiyura varaikum repeat pannu</b>-nu autonomy kudukurathu.</p>
+      <div class="callout"><b>Simple Chatbot:</b> Question → oru answer → mudinjadhu. <b>Agent:</b> Goal → think → action(tool) → result paaru → thirumba think → next action → ... → goal mudinjadhum stop.</div>
+
+      <h3>15.2 Core Loop — ReAct Pattern (Reasoning + Acting)</h3>
+      <p>Mostly ella agent-um idhே loop than follow pannum:</p>
+      <div class="diagram">
+        <svg viewBox="0 0 700 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr15" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--amber)"></path>
+            </marker>
+          </defs>
+          <path class="dgm-edge" marker-end="url(#arr15)" d="M180,60 L280,60"></path>
+          <path class="dgm-edge" marker-end="url(#arr15)" d="M420,60 L520,60"></path>
+          <path class="dgm-edge" marker-end="url(#arr15)" d="M570,90 C620,150 470,220 380,220"></path>
+          <text class="dgm-edge-label" x="590" y="150">Goal illa</text>
+          <text class="dgm-edge-label" x="590" y="162">(loop back)</text>
+          <path class="dgm-edge" marker-end="url(#arr15)" d="M220,220 L150,90"></path>
+          <path class="dgm-edge" marker-end="url(#arr15)" d="M300,250 L300,280"></path>
+          <text class="dgm-edge-label" x="310" y="270">Goal complete</text>
+
+          <g class="dgm-node warm"><rect x="20" y="34" width="160" height="52" rx="14"></rect><text class="t" x="100" y="66" text-anchor="middle">Thought</text></g>
+          <g class="dgm-node"><rect x="280" y="34" width="140" height="52" rx="14"></rect><text class="t" x="350" y="66" text-anchor="middle">Action</text></g>
+          <g class="dgm-node"><rect x="520" y="34" width="160" height="52" rx="14"></rect><text class="t" x="600" y="66" text-anchor="middle">Observation</text></g>
+          <g class="dgm-node hot"><rect x="220" y="194" width="160" height="52" rx="14"></rect><text class="t" x="300" y="226" text-anchor="middle">Final Answer</text></g>
+        </svg>
+      </div>
+      <ul>
+        <li><b>Thought</b> — "Idha mudika enna pannanum" nu LLM internal-a reason pannum.</li>
+        <li><b>Action</b> — Oru tool call pannum (search, calculator, DB query, code run).</li>
+        <li><b>Observation</b> — Tool-oda result-a paakum.</li>
+        <li>Goal mudiyala na, thirumba <b>Thought</b>-ku pogum — idhே loop repeat aagum, goal mudiyura varaikum.</li>
+      </ul>
+
+      <h3>15.3 Agent vs Workflow — Difference Enna?</h3>
+      <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th></th><th>Workflow (namma Part 1-la kattina graph)</th><th>Agent</th></tr>
+        <tr><td>Path</td><td>Developer <b>fixed-a</b> define pannirukaru (conditional edges irundhalum, options developer decide pannirukaru)</td><td>LLM <b>runtime-la</b> decide pannum — evlo steps, enda tools, enda order nu</td></tr>
+        <tr><td>Predictability</td><td>High — enna nadakum nu munnadiye theriyum</td><td>Low — LLM decision base panni vary aagum</td></tr>
+        <tr><td>Use case</td><td>Clear, repeatable business process (ticket routing)</td><td>Open-ended goals (research, coding, complex tasks)</td></tr>
+      </table>
+      </div>
+      <div class="callout">LangGraph rendaiyum build panna use aagum — <b>Workflow</b>-ku fixed graph create pannuvom; <b>Agent</b>-ku oru node "LLM decide pannitu tool select pannum" maadhiri loop vachi build pannuvom (idha keela paaklam).</div>
+
+      <h3>15.4 Autonomy Levels</h3>
+      <div class="tbl-wrap">
+      <table class="tbl">
+        <tr><th>Level</th><th>Enna Panradhu</th></tr>
+        <tr><td>1. Simple Chain</td><td>Prompt → LLM → Output. Autonomy illave illa.</td></tr>
+        <tr><td>2. Router</td><td>LLM ஒரு fixed set options-la irundhu 1-a pick pannum (Part 4 support-ticket maadhiri)</td></tr>
+        <tr><td>3. Tool-Calling Agent</td><td>LLM decide pannum enda tool use pannanum, evlo times, loop pannitu goal mudikum</td></tr>
+        <tr><td>4. Multi-Agent System</td><td>Multiple specialized agents collaborate pannuvanga, supervisor coordinate pannum</td></tr>
+        <tr><td>5. Fully Autonomous</td><td>Long-horizon goals, self-directed, minimal human check-in (eg. autonomous coding agents)</td></tr>
+      </table>
+      </div>
+
+      <h3>15.5 Oru Agent-oda Core Components</h3>
+      <ul>
+        <li><b>LLM (Brain)</b> — reasoning &amp; decision making.</li>
+        <li><b>Tools (Hands)</b> — functions agent call panna mudiyum (search, calculator, API call, code execution).</li>
+        <li><b>Memory</b> — short-term (current conversation) + long-term (vector store la irundhu past context).</li>
+        <li><b>Planning</b> — periya goal-a chinna steps-a break pannuradhu.</li>
+        <li><b>Orchestration Layer</b> — idhே than <b>LangGraph</b>-oda vela, loop-a run pannitu state manage pannum.</li>
+      </ul>
+
+      <h3>15.6 Code — Simple Tool-Calling Agent (LangGraph Prebuilt)</h3>
+      <p>LangGraph-la already <code>create_react_agent</code> nu oru prebuilt helper irukku — idha vachi full ReAct loop namma manual-a build pannama use pannalam:</p>
+      <pre class="code"><span class="kw">from</span> langgraph.prebuilt <span class="kw">import</span> create_react_agent
+<span class="kw">from</span> langchain_anthropic <span class="kw">import</span> ChatAnthropic
+<span class="kw">from</span> langchain_core.tools <span class="kw">import</span> tool
+
+<span class="kw">@tool</span>
+<span class="kw">def</span> get_weather(city: str) -> str:
+    <span class="str">"""Get current weather for a city"""</span>
+    <span class="cm"># real app-la idhu weather API call pannum</span>
+    <span class="kw">return</span> <span class="kw">f</span><span class="str">"It's sunny in {city}, 28°C"</span>
+
+llm = ChatAnthropic(model=<span class="str">"claude-sonnet-4-6"</span>)
+agent = create_react_agent(llm, tools=[get_weather])
+
+<span class="cm"># Agent-a run pannu — idhu andha ReAct loop full-a automatic-a run aagum</span>
+result = agent.invoke({<span class="str">"messages"</span>: [(<span class="str">"user"</span>, <span class="str">"What's the weather in Chennai?"</span>)]})
+print(result[<span class="str">"messages"</span>][-<span class="str">1</span>].content)</pre>
+      <div class="callout">Idhu inside-la enna nadakudhu nu na: LLM <b>"Thought: weather ku tool call pannanum"</b> nu decide pannum → <b>Action:</b> <code>get_weather("Chennai")</code> call pannum → <b>Observation:</b> result kedaikum → LLM adha vachi final answer generate pannum. Ellam oru <code>.invoke()</code> call-la nadakum.</div>
+
+      <h3>15.7 Real-World Agentic Systems</h3>
+      <ul>
+        <li><b>Coding Agents</b> — code eluthum, run pannum, error irundha fix pannum, thirumba test pannum (loop).</li>
+        <li><b>Research Agents</b> — web search pannitu, multiple sources verify pannitu, report compile pannum.</li>
+        <li><b>Browser Agents</b> — website navigate pannum, forms fill pannum, tasks complete pannum.</li>
+        <li><b>Customer Support Agents</b> — Part 2/4/11-la paathadhu, but tool-calling add pannina (order lookup, refund API) andhே "agentic" aagidum.</li>
+      </ul>
+
+      <div class="callout"><b>Security reminder:</b> Agent autonomy adhigama irundha, risk-um adhigam — Part 13.4 la sonna <b>least-privilege tool access</b> mukkiyama follow pannunga. Agent-ku "delete database" permission venamave venaam, "read-only search" mattum podhum most cases-la.</div>
+    </section>
+
     <footer>
       Built as a learning companion for LangGraph &amp; LangChain in Tanlish. Next: idhே project-a RAG retriever node add pannitu extend pannalam.
     </footer>
@@ -1200,6 +1302,7 @@ const sections = [
   {id:'s12', label:'12 · Self-Check Quiz'},
   {id:'s13', label:'13 · Career & Security'},
   {id:'s14', label:'14 · Streamlit RAG Project'},
+  {id:'s15', label:'15 · Agentic AI'},
 ];
 
 function buildNav(container){

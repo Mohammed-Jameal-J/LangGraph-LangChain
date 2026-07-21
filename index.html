@@ -67,6 +67,7 @@
   .sidebar-foot{margin-top:32px; padding-top:16px; border-top:1px solid var(--line); font-size:11px; color:var(--ink-dim); font-family:var(--font-mono);}
 
   .mobile-bar{display:none;}
+  .mobile-drawer{display:none;}
 
   main{flex:1; min-width:0;}
 
@@ -257,7 +258,7 @@
       <h1>LangGraph &amp; LangChain, oru <em>graph</em> maadhiri kathukalam.</h1>
       <p class="lead">State, Nodes, Edges-la irundhu, Chunking, RAG pipeline varaikum — ella concept-um real-world diagram-oda, code-oda explain pannirukom.</p>
       <div class="hero-stats">
-        <div><div class="stat-num">13</div><div class="stat-label">Core Sections</div></div>
+        <div><div class="stat-num">14</div><div class="stat-label">Core Sections</div></div>
         <div><div class="stat-num">06</div><div class="stat-label">Hand-built Diagrams</div></div>
         <div><div class="stat-num">01</div><div class="stat-label">Full RAG Build</div></div>
       </div>
@@ -267,9 +268,12 @@
     <section class="block" id="s0">
       <div class="block-eyebrow">Coverage Check</div>
       <h2>Idhu Everything Cover Pannuma?</h2>
-      <p>Straight-a sollanum na — <b>illa</b>. Idhu core practical 80% cover pannurudhu: State/Nodes/Edges, conditional routing, chunking, oru full RAG pipeline. Idhu keela irukura topics cover pannala:</p>
+      <p>Ippo site 15 sections (Parts 0–14) — core LangGraph/LangChain concepts mattum illa, hands-on projects, API key setup, career roles, deep security, and oru full Streamlit + OpenAI RAG project varaikum cover pannirudhu. Straight-a sollanum na: <b>practical, job-ready foundation full-a irukku</b>, ana framework-oda ovvoru corner-um illa.</p>
+
+      <div class="callout"><b>Ippo cover pannirukom:</b> State/Nodes/Edges/Cycles, Checkpointer basics, LangChain vs LangGraph, Chunking strategies, Full RAG (ingestion + retrieval), Support-ticket &amp; multi-agent patterns, 2 hands-on projects, Claude/OpenAI API key setup + spend limits, career roles + study roadmap, deep security (11-point table), 20-question MCQ self-test, and a complete Streamlit + OpenAI RAG project from key to deploy.</div>
+
       <div class="coverage-note">
-        <b>Missing topics (LangGraph):</b>
+        <b>Innum missing topics (LangGraph):</b>
         <ul>
           <li>Subgraphs &amp; <code>Send</code> map-reduce fan-out</li>
           <li>Streaming modes (values / updates / messages)</li>
@@ -1003,6 +1007,176 @@ openai_client = OpenAI(api_key=os.environ[<span class="str">"OPENAI_API_KEY"</sp
       <div class="callout"><b>Rule of thumb:</b> "LLM oru untrusted user"-nu nenachi design pannunga — adhu enna output kudukum nu predict panna mudiyaadhu, adhanala validate pannாma edhuvum trust pannaadhinga. Adhே maadhiri, "user input oru attacker input"-nu nenachi sanitize pannunga.</div>
     </section>
 
+    <section class="block" id="s14">
+      <div class="block-eyebrow">Part 14</div>
+      <h2>Streamlit + OpenAI — Full RAG Project (API Key to Deploy)</h2>
+
+      <h3>14.1 Streamlit Enna? Yean Use Pannuvom?</h3>
+      <p><b>Streamlit</b> = oru Python library, adha vachi neenga <b>HTML/CSS/JS ellam therilaama</b> — pure Python code mattum vachi, interactive web app build pannalam. Oru <code>.py</code> script-a run panna, adhu automatic-a browser-la oru full web app ah open aagum.</p>
+      <ul>
+        <li>File uploader, chat interface, buttons, sliders — ellam <b>oru line code</b> la kedaikum.</li>
+        <li>ML/AI demos, RAG chatbots, internal dashboards build panna <b>fastest</b> way.</li>
+        <li>Code change pannina moment, app <b>auto-reload</b> aagum — instant feedback.</li>
+        <li><b>Streamlit Community Cloud</b> la free-a host pannalam — GitHub repo connect pannina podhum.</li>
+      </ul>
+      <div class="callout">Idhu enga fit aagudhu nu na — <b>LangChain/LangGraph</b> backend logic (retrieval, agent, LLM calls) handle pannum; <b>Streamlit</b> adha oru chat UI-la wrap pannum. Backend + Frontend rendaiyum namma ஒரே Python file-la eluthalam.</div>
+
+      <h3>14.2 Project: "PDF Chat" — Upload PDF, Chat With It</h3>
+      <p>Idhu oru complete, sondha kaila try panna vendiya project — PDF upload pannunga, adhu pathi kekura questions-ku grounded answer varum.</p>
+
+      <div class="diagram">
+        <svg viewBox="0 0 460 560" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="arr14" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+              <path d="M0,0 L10,5 L0,10 z" fill="var(--teal)"></path>
+            </marker>
+          </defs>
+          <path class="dgm-edge" marker-end="url(#arr14)" d="M230,74 L230,102"></path>
+          <path class="dgm-edge" marker-end="url(#arr14)" d="M230,184 L230,212"></path>
+          <path class="dgm-edge" marker-end="url(#arr14)" d="M230,294 L230,322"></path>
+          <path class="dgm-edge" marker-end="url(#arr14)" d="M230,404 L230,432"></path>
+          <path class="dgm-edge" marker-end="url(#arr14)" d="M230,464 L230,492"></path>
+
+          <g class="dgm-node warm"><rect x="90" y="20" width="280" height="54" rx="14"></rect><text class="t" x="230" y="46" text-anchor="middle">Upload PDF (Sidebar)</text><text class="s" x="230" y="62" text-anchor="middle">st.sidebar.file_uploader</text></g>
+          <g class="dgm-node"><rect x="90" y="130" width="280" height="54" rx="14"></rect><text class="t" x="230" y="156" text-anchor="middle">Extract + Chunk Text</text><text class="s" x="230" y="172" text-anchor="middle">pypdf → 800-char chunks</text></g>
+          <g class="dgm-node"><rect x="90" y="240" width="280" height="54" rx="14"></rect><text class="t" x="230" y="266" text-anchor="middle">Embed Chunks</text><text class="s" x="230" y="282" text-anchor="middle">text-embedding-3-small</text></g>
+          <g class="dgm-node"><rect x="90" y="350" width="280" height="54" rx="14"></rect><text class="t" x="230" y="376" text-anchor="middle">User Types Question</text><text class="s" x="230" y="392" text-anchor="middle">st.chat_input</text></g>
+          <g class="dgm-node"><rect x="90" y="410" width="280" height="54" rx="14"></rect><text class="t" x="230" y="436" text-anchor="middle">Cosine Similarity Retrieval</text><text class="s" x="230" y="452" text-anchor="middle">Top-4 relevant chunks</text></g>
+          <g class="dgm-node hot"><rect x="70" y="492" width="320" height="54" rx="14"></rect><text class="t" x="230" y="518" text-anchor="middle">Grounded Prompt → GPT (streamed)</text><text class="s" x="230" y="534" text-anchor="middle">st.chat_message + st.write_stream</text></g>
+        </svg>
+      </div>
+
+      <span class="step-tag">STEP 1 · OpenAI API Key</span>
+      <p>Part 10-la sonna maadhiri <b>platform.openai.com</b> la key vaangunga, billing add pannunga, spend limit set pannunga. Idhu illama idhu project run aagaadhu.</p>
+
+      <span class="step-tag">STEP 2 · Folder Structure</span>
+      <div class="fs-tree"><span class="dir">pdf-chat-streamlit/</span>
+├── <span class="file">.env</span>              <span class="cm"># OPENAI_API_KEY</span>
+├── <span class="file">requirements.txt</span>
+├── <span class="file">app.py</span>            <span class="cm"># full Streamlit app</span>
+└── <span class="file">.gitignore</span>        <span class="cm"># .env ignore pannunga</span></div>
+
+      <span class="step-tag">STEP 3 · Terminal — Setup</span>
+      <div class="term">
+<span class="ln">mkdir pdf-chat-streamlit &amp;&amp; cd pdf-chat-streamlit</span>
+<span class="ln">python3 -m venv venv</span>
+<span class="ln">source venv/bin/activate</span>
+<span class="out"># Windows: venv\Scripts\activate</span>
+      </div>
+
+      <span class="step-tag">STEP 4 · requirements.txt</span>
+      <pre class="code">streamlit
+openai
+pypdf
+python-dotenv
+numpy</pre>
+
+      <div class="term">
+<span class="ln">pip install -r requirements.txt</span>
+      </div>
+
+      <span class="step-tag">STEP 5 · .env</span>
+      <pre class="code">OPENAI_API_KEY=sk-xxxxxxxxxxxxxxxxxxxxxx</pre>
+
+      <span class="step-tag">STEP 6 · app.py — Full Code</span>
+      <pre class="code"><span class="kw">import</span> streamlit <span class="kw">as</span> st
+<span class="kw">from</span> openai <span class="kw">import</span> OpenAI
+<span class="kw">from</span> pypdf <span class="kw">import</span> PdfReader
+<span class="kw">import</span> os, numpy <span class="kw">as</span> np
+<span class="kw">from</span> dotenv <span class="kw">import</span> load_dotenv
+
+load_dotenv()
+client = OpenAI(api_key=os.environ.get(<span class="str">"OPENAI_API_KEY"</span>))
+
+st.set_page_config(page_title=<span class="str">"PDF Chat"</span>, page_icon=<span class="str">"📄"</span>)
+st.title(<span class="str">"📄 Chat with your PDF"</span>)
+
+<span class="cm"># ---- session state: namma "graph state" maadhiri ----</span>
+<span class="kw">if</span> <span class="str">"chunks"</span> <span class="kw">not in</span> st.session_state:
+    st.session_state.chunks = []
+    st.session_state.embeddings = []
+<span class="kw">if</span> <span class="str">"messages"</span> <span class="kw">not in</span> st.session_state:
+    st.session_state.messages = []
+
+<span class="kw">def</span> chunk_text(text, size=<span class="str">800</span>, overlap=<span class="str">100</span>):
+    chunks, start = [], <span class="str">0</span>
+    <span class="kw">while</span> start &lt; len(text):
+        chunks.append(text[start:start+size])
+        start += size - overlap
+    <span class="kw">return</span> chunks
+
+<span class="kw">def</span> embed(texts):
+    res = client.embeddings.create(model=<span class="str">"text-embedding-3-small"</span>, input=texts)
+    <span class="kw">return</span> [d.embedding <span class="kw">for</span> d <span class="kw">in</span> res.data]
+
+<span class="kw">def</span> cosine_sim(a, b):
+    a, b = np.array(a), np.array(b)
+    <span class="kw">return</span> float(np.dot(a,b) / (np.linalg.norm(a)*np.linalg.norm(b)))
+
+<span class="cm"># ---- Sidebar: upload + index ----</span>
+uploaded = st.sidebar.file_uploader(<span class="str">"Upload a PDF"</span>, type=<span class="str">"pdf"</span>)
+<span class="kw">if</span> uploaded <span class="kw">and</span> st.sidebar.button(<span class="str">"Process PDF"</span>):
+    reader = PdfReader(uploaded)
+    full_text = <span class="str">"\n"</span>.join(page.extract_text() <span class="kw">or</span> <span class="str">""</span> <span class="kw">for</span> page <span class="kw">in</span> reader.pages)
+    chunks = chunk_text(full_text)
+    <span class="kw">with</span> st.spinner(<span class="kw">f</span><span class="str">"Embedding {len(chunks)} chunks..."</span>):
+        embeddings = embed(chunks)
+    st.session_state.chunks = chunks
+    st.session_state.embeddings = embeddings
+    st.sidebar.success(<span class="kw">f</span><span class="str">"Ready! {len(chunks)} chunks indexed."</span>)
+
+<span class="cm"># ---- Show chat history ----</span>
+<span class="kw">for</span> msg <span class="kw">in</span> st.session_state.messages:
+    <span class="kw">with</span> st.chat_message(msg[<span class="str">"role"</span>]):
+        st.markdown(msg[<span class="str">"content"</span>])
+
+<span class="cm"># ---- Chat input + RAG pipeline ----</span>
+query = st.chat_input(<span class="str">"Ask something about the PDF..."</span>)
+<span class="kw">if</span> query:
+    <span class="kw">if</span> <span class="kw">not</span> st.session_state.chunks:
+        st.warning(<span class="str">"Upload and process a PDF first."</span>)
+    <span class="kw">else</span>:
+        st.session_state.messages.append({<span class="str">"role"</span>:<span class="str">"user"</span>,<span class="str">"content"</span>:query})
+        <span class="kw">with</span> st.chat_message(<span class="str">"user"</span>):
+            st.markdown(query)
+
+        q_embedding = embed([query])[<span class="str">0</span>]
+        scored = [(cosine_sim(q_embedding, e), c) <span class="kw">for</span> e, c <span class="kw">in</span>
+                  zip(st.session_state.embeddings, st.session_state.chunks)]
+        scored.sort(reverse=<span class="str">True</span>)
+        context = <span class="str">"\n\n---\n\n"</span>.join([c <span class="kw">for</span> _, c <span class="kw">in</span> scored[:<span class="str">4</span>]])
+
+        prompt = <span class="kw">f</span><span class="str">"Answer ONLY using the context below. If not found, say you don't know.\n\nContext:\n{context}\n\nQuestion: {query}"</span>
+
+        <span class="kw">with</span> st.chat_message(<span class="str">"assistant"</span>):
+            stream = client.chat.completions.create(
+                model=<span class="str">"gpt-5.4-mini"</span>,
+                messages=[{<span class="str">"role"</span>:<span class="str">"user"</span>,<span class="str">"content"</span>:prompt}],
+                stream=<span class="str">True</span>,
+            )
+            response = st.write_stream(
+                chunk.choices[<span class="str">0</span>].delta.content <span class="kw">or</span> <span class="str">""</span> <span class="kw">for</span> chunk <span class="kw">in</span> stream
+            )
+        st.session_state.messages.append({<span class="str">"role"</span>:<span class="str">"assistant"</span>,<span class="str">"content"</span>:response})</pre>
+
+      <span class="step-tag">STEP 7 · Run It</span>
+      <div class="term">
+<span class="ln">streamlit run app.py</span>
+<span class="out"># Browser la automatic-a http://localhost:8501 open aagum</span>
+      </div>
+
+      <div class="callout"><b>Note (2026):</b> Chat model name <code>gpt-5.4-mini</code> / embedding <code>text-embedding-3-small</code> — idhu current recommended-a irundhalum, OpenAI models frequently update pannuvanga, so run panna munnadi <b>platform.openai.com/docs/models</b> la latest model list check pannunga.</p></div>
+
+      <h3>14.3 Deploy Pannanumna (Optional)</h3>
+      <ol>
+        <li>Code-a GitHub-ku push pannunga (private repo-um sari — Streamlit Cloud <b>private repos support pannum</b>, unlike GitHub Pages).</li>
+        <li><b>share.streamlit.io</b> ku poi GitHub-oda connect pannunga.</li>
+        <li>"Create app" → un repo + <code>app.py</code> select pannunga.</li>
+        <li><code>.env</code> venaam — Streamlit Cloud-oda <b>"Secrets"</b> section-la <code>OPENAI_API_KEY</code> add pannunga (dashboard-lene, code-la illa).</li>
+        <li>Community tier-la free-a <b>oru private repo</b> deploy pannalam + <b>viewer allow-list</b> vachi "idha mattum paakanum" nu specific people-ku mattum access kudukalam — idhu than "only I can see" ku exact solution.</li>
+      </ol>
+    </section>
+
     <footer>
       Built as a learning companion for LangGraph &amp; LangChain in Tanlish. Next: idhே project-a RAG retriever node add pannitu extend pannalam.
     </footer>
@@ -1025,6 +1199,7 @@ const sections = [
   {id:'s11', label:'11 · Practice Projects'},
   {id:'s12', label:'12 · Self-Check Quiz'},
   {id:'s13', label:'13 · Career & Security'},
+  {id:'s14', label:'14 · Streamlit RAG Project'},
 ];
 
 function buildNav(container){
